@@ -13,7 +13,7 @@
 
 ## Como instalar
 
-* Clone este repositório e instale as dependecias com o seguinte comando:
+* Clone este repositório e instale as dependências com o seguinte comando:
 ```
 bundle install
 ```
@@ -34,8 +34,8 @@ rails s
 ## Como usar a API
 
 * Para importar o arquivo csv para o banco de dados, envie um POST request para o endpoint abaixo seguindo o padrão:
- headers => Content-Type  text/csv
- body => file: csv_file.csv
+ > headers => Content-Type  text/csv
+ > body => file: csv_file.csv
 ```
 http://localhost:3000/movies
 ```

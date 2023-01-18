@@ -7,6 +7,7 @@ RSpec.describe 'Movies', type: :request do
       expect(response).to have_http_status(200)
     end
     it 'returns a list of movies' do
+      create(:movie)
       get movies_path
       expect(response.body).to include_json([
                                               id: /\d+/,
@@ -21,11 +22,13 @@ RSpec.describe 'Movies', type: :request do
   end
 
   describe 'POST /movies' do
-    it 'creates a movie' do
-      headers = { 'ACCEPT' => 'application/json' }
-      post movies_path, params: { movies: Rails.root.join('spec', 'netflix_titles.csv') }, headers: headers
+    it 'import CSV file' do
+      headers = { 'Content-Type' => 'text/csv' }
+      file = Rack::Test::UploadedFile.new(Rails.root.join('spec', 'netflix_titles.csv'), 'text/csv')
+      post movies_path, params: { file: }, headers: headers
 
       expect(response).to have_http_status(201)
+      expect(response.body).to include_json(message: 'Movies imported successfully')
     end
   end
 end

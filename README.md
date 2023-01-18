@@ -1,24 +1,51 @@
-# README
+# MOVIE CATALOG API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+ > API que recebe arquivos do tipo csv com listas de filmes e importa para o banco de dados para consultas.
 
 * Ruby version
+  3.1.2
 
-* System dependencies
+* Rails version
+  7.0.4
 
-* Configuration
+* PostgreSQL version
+  12
 
-* Database creation
+## Como instalar
 
-* Database initialization
+* Clone este repositório e instale as dependecias com o seguinte comando:
+```
+bundle install
+```
 
-* How to run the test suite
+## Para criar e inicializar o banco de dados
 
-* Services (job queues, cache servers, search engines, etc.)
+* Execute o comando abaixo no seu terminal dentro da pasta do projeto:
+```
+rails db:create db:migrate
+```
 
-* Deployment instructions
+## Execute a aplicação
 
-* ...
+```
+rails s
+```
+
+## Como usar a API
+
+* Para importar o arquivo csv para o banco de dados, envie um POST request para o endpoint abaixo seguindo o padrão:
+ headers => Content-Type  text/csv
+ body => file: csv_file.csv
+```
+http://localhost:3000/movies
+```
+
+* Para listar todos os filmes cadastrados basta fazer um GET request no mesmo endereço:
+```
+http://localhost:3000/movies
+```
+
+* Também é possivel filtrar utilizando uma palavra-chave que realizará uma busca em todos os campos(title, genre, year, country, published_at e description)
+```
+http://localhost:3000/movies/<palavra-chave>
+```

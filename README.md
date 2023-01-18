@@ -49,3 +49,10 @@ http://localhost:3000/movies
 ```
 http://localhost:3000/movies/<palavra-chave>
 ```
+
+## TESTES
+
+* Para rodar a suite de testes execute o comando abaixo:
+```
+rspec
+```

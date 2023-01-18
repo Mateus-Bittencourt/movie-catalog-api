@@ -21,6 +21,28 @@ RSpec.describe 'Movies', type: :request do
     end
   end
 
+  describe 'GET /movies/:filter' do
+    it 'returns a list of movies filtered by param' do
+      create(:movie, title: 'The Shawshank Redemption')
+      create(:movie, title: 'The Godfather')
+      create(:movie, title: 'The Godfather: Part II')
+      create(:movie, title: 'The Dark Knight')
+      create(:movie, title: '12 Angry')
+      get '/movies/Godfather'
+
+      expect(response.body).to include_json([
+
+                                             id: /\d+/,
+                                             title: /\The Godfather/,
+                                             genre: (be_kind_of String),
+                                             year: /\d+/,
+                                             country: (be_kind_of String),
+                                             published_at: /\d{4}-\d{2}-\d{2}/,
+                                             description: (be_kind_of String)
+                                           ])
+    end
+  end
+
   describe 'POST /movies' do
     it 'import CSV file' do
       headers = { 'Content-Type' => 'text/csv' }
